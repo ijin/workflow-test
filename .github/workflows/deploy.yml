@@ -1,4 +1,4 @@
-name: Deploy AWS resources (Terraform apply)
+name: Deploy
 on:
   workflow_dispatch:
     inputs:
@@ -17,9 +17,14 @@ jobs:
       fail-fast: false
       matrix:
         stage: [dev, stg, prod]
-    if: >-
-      github.event_name == 'workflow_dispatch' && matrix.stage == inputs.env-name ||
-      github.event_name == 'push'
+        isManual:
+          - ${{ github.event_name == 'workflow_dispatch' }}
+        exclude:
+          - isManual: true
+        include:
+          # Re-include only the selected environment for manual trigger
+          - stage: ${{ inputs.env-name }}
+            isManual: true
     environment: ${{ matrix.stage }}
     env:
       STAGE: ${{ matrix.stage }}
