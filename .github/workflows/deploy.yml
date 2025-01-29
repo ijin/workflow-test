@@ -16,15 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stage: [dev, stg, prod]
-        isManual:
-          - ${{ github.event_name == 'workflow_dispatch' }}
-        exclude:
-          - isManual: true
-        include:
-          # Re-include only the selected environment for manual trigger
-          - stage: ${{ inputs.env-name }}
-            isManual: true
+        stage: ${{ github.event_name == 'workflow_dispatch' && fromJSON(format('["{0}"]', inputs.env-name)) || fromJSON('["dev", "stg", "prod"]') }}
     environment: ${{ matrix.stage }}
     env:
       STAGE: ${{ matrix.stage }}
