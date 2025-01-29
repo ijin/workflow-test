@@ -23,6 +23,7 @@ jobs:
     environment: ${{ matrix.stage }}
     env:
       STAGE: ${{ matrix.stage }}
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
