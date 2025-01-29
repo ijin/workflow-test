@@ -1,0 +1,34 @@
+name: Deploy AWS resources (Terraform apply)
+on:
+  workflow_dispatch:
+    inputs:
+      env-name:
+        type: environment
+        required: true
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy.yml"
+
+jobs:
+  deploy:
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [dev, stg, prod]
+    if: >-
+      github.event_name == 'workflow_dispatch' && matrix.stage == inputs.env-name ||
+      github.event_name == 'push'
+    environment: ${{ matrix.stage }}
+    env:
+      STAGE: ${{ matrix.stage }}
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - run: echo $STAGE
