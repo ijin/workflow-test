@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - ".github/workflows/deploy.yml"
+      - "*"
 
 jobs:
   deploy:
