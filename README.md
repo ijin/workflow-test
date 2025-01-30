@@ -21,3 +21,10 @@
 <img width="491" alt="Screenshot 2025-01-30 at 9 39 18" src="https://github.com/user-attachments/assets/ed59ae2c-8084-4390-af52-121bf196fedd" />
 
 <img width="744" alt="Screenshot 2025-01-30 at 9 40 13" src="https://github.com/user-attachments/assets/22cec96a-9192-4b23-8a08-ca59d62cf2c8" />
+
+
+### ref
+
+notifications for separate slack channels
+
+https://techblog.kayac.com/github-actions-that-notifies-separate-slack-channels-for-each-deployment-target
